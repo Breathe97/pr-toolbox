@@ -13,22 +13,28 @@ import path from 'node:path'
 process.env.DIST = path.join(__dirname, '../dist')
 process.env.VITE_PUBLIC = app.isPackaged ? process.env.DIST : path.join(process.env.DIST, '../public')
 
-
 let win: BrowserWindow | null
 // 🚧 Use ['ENV_NAME'] avoid vite:define plugin - Vite@2.x
 const VITE_DEV_SERVER_URL = process.env['VITE_DEV_SERVER_URL']
 
 function createWindow() {
   win = new BrowserWindow({
+    title: '欢迎使用PR工具箱',
+    minWidth: 1200,
+    minHeight: 720,
+    maxWidth: 1600,
+    maxHeight: 900,
+    // opacity: 0.7,
+    // frame: false, // 无边框
     icon: path.join(process.env.VITE_PUBLIC, 'electron-vite.svg'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     },
   })
-
+  // win.setIgnoreMouseEvents(true) // 鼠标事件穿透
   // Test active push message to Renderer-process.
   win.webContents.on('did-finish-load', () => {
-    win?.webContents.send('main-process-message', (new Date).toLocaleString())
+    win?.webContents.send('main-process-message', new Date().toLocaleString())
   })
 
   if (VITE_DEV_SERVER_URL) {
