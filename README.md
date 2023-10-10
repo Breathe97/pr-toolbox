@@ -38,7 +38,12 @@ npm i
 
 ```bash
 
-# 指定electron的安装源地址 (新地址)
+# 指定electron源地址 (旧地址)
+# electron_mirror=https://npm.taobao.org/mirrors/electron/
+# electron_builder_binaries_mirror=http://npm.taobao.org/mirrors/electron-builder-binaries/
+
+# 指定electron源地址 (新地址)
 electron_mirror=https://cdn.npmmirror.com/binaries/electron/
+electron_builder_binaries_mirror=https://cdn.npmmirror.com/binaries/electron-builder-binaries/
 
 ```
