@@ -1,6 +1,6 @@
 import { app, BrowserWindow } from 'electron'
 import path from 'node:path'
-
+import { ipcMainlisten } from './events/core'
 // The built directory structure
 //
 // ├─┬─┬ dist
@@ -17,32 +17,37 @@ let win: BrowserWindow | null
 // 🚧 Use ['ENV_NAME'] avoid vite:define plugin - Vite@2.x
 const VITE_DEV_SERVER_URL = process.env['VITE_DEV_SERVER_URL']
 
+const icon = `${process.env.VITE_PUBLIC}/pryun_logo.png`
 function createWindow() {
   win = new BrowserWindow({
-    title: '欢迎使用PR工具箱',
-    minWidth: 1200,
-    minHeight: 720,
-    maxWidth: 1600,
-    maxHeight: 900,
+    icon,
+    width: 1200,
+    height: 720,
     // opacity: 0.7,
     // frame: false, // 无边框
-    icon: path.join(process.env.VITE_PUBLIC, 'electron-vite.svg'),
+    // frame: false,
+    autoHideMenuBar: true, // 取消菜单栏
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     },
   })
+
   // win.setIgnoreMouseEvents(true) // 鼠标事件穿透
+
   // Test active push message to Renderer-process.
   win.webContents.on('did-finish-load', () => {
     win?.webContents.send('main-process-message', new Date().toLocaleString())
   })
-
   if (VITE_DEV_SERVER_URL) {
     win.loadURL(VITE_DEV_SERVER_URL)
   } else {
     // win.loadFile('dist/index.html')
     win.loadFile(path.join(process.env.DIST, 'index.html'))
   }
+  ipcMainlisten(win)
+
+  // electronRemote.initialize() // 初始化远端线程监听
+  // electronRemote.enable(win.webContents) // 开启远程事件
 }
 
 // Quit when all windows are closed, except on macOS. There, it's common

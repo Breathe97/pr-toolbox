@@ -1,5 +1,7 @@
 {
   "name": "pr-toolbox",
+  "description": "欢迎使用PR工具箱",
+  "author": "Breathe",
   "private": true,
   "version": "0.9.7",
   "scripts": {
@@ -11,6 +13,7 @@
     "vue": "^3.3.4"
   },
   "devDependencies": {
+    "@electron/remote": "^2.0.12",
     "@vitejs/plugin-vue": "^4.3.4",
     "electron": "^26.1.0",
     "electron-builder": "^24.6.4",
