@@ -6,12 +6,16 @@
 <script setup lang="ts">
 // import { Menu, Tray } from 'electron'
 const setTray = () => {
+  let a = '123'
   console.log('\x1b[38;2;0;151;255m%c%s\x1b[0m', 'color:#0097ff;padding:16px 0;', `------->Breathe:`)
+  alert(a)
+  postMessage({ payload: 'setTray' }, '*')
 }
 </script>
 <style scoped lang="scss">
 .menus {
   width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;

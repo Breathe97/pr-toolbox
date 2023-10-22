@@ -9,6 +9,7 @@ html {
   font-size: 14px;
   width: 100vw;
   height: -webkit-fill-available;
+  background-color: var(--color-bg, rgba(30, 30, 32, 1));
 }
 body {
   margin: 0;
@@ -17,7 +18,11 @@ body {
   overflow-x: hidden;
   overflow-y: overlay;
 }
-
+#app {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
 .backdrop-filter {
   backdrop-filter: saturate(180%) blur(20px);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
